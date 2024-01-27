@@ -1,15 +1,15 @@
 import type {
-	APIGatewayEvent,
-	APIGatewayEventRequestContext,
+	APIGatewayProxyEvent,
+	APIGatewayProxyResult,
 	Context,
 } from "aws-lambda";
 import startApp from "./server";
 import serverlessExpress from "@codegenie/serverless-express";
 
 export const handler: (
-	event: APIGatewayEvent,
+	event: APIGatewayProxyEvent,
 	context: Context,
-) => void = async (event, context) => {
+) => Promise<APIGatewayProxyResult> = async (event, context) => {
 	const app = await startApp();
 	const serverlessExpressInstance = serverlessExpress({
 		app,
