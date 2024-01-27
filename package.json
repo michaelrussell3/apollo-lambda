@@ -3,7 +3,7 @@
 		"package": "ncc build src/lambda.ts",
 		"build": "ncc build src/local.ts",
 		"build:watch": "npm run build -- --watch",
-		"dev:server": "nodemon --watch dist ./dist/local.js",
+		"dev:server": "nodemon --watch dist ./dist/index.js",
 		"dev": "npm run build && concurrently npm:build:watch npm:dev:server "
 	},
 	"dependencies": {
