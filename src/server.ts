@@ -21,6 +21,18 @@ const resolvers = {
 };
 
 const app = express();
+
+// allow cors on any endpoint
+app.use(cors());
+
+app.get("/", (req, res) => {
+	res.send("Available endpoints: /hello-world, /graphql");
+});
+
+app.get("/hello-world", (req, res) => {
+	res.send("hello world (from express route)");
+});
+
 const httpServer = http.createServer(app);
 
 async function startApp() {
@@ -33,12 +45,7 @@ async function startApp() {
 	await server.start();
 
 	// Specify the path where we'd like to mount our server
-	app.use(
-		"/",
-		cors<cors.CorsRequest>(),
-		express.json(),
-		expressMiddleware(server),
-	);
+	app.use("/graphql", express.json(), expressMiddleware(server));
 	return app;
 }
 
